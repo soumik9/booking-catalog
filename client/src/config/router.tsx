@@ -3,6 +3,7 @@ import Home from "../views/Home/Home";
 import Layout from "../components/Layout/Layout";
 import Signup from "../views/Signup/Signup";
 import Signin from "../views/Signin/Signin";
+import AddNewBook from "../views/AddNewBook/AddNewBook";
 
 export const router = createBrowserRouter([
     {
@@ -20,5 +21,9 @@ export const router = createBrowserRouter([
     {
         path: "/signup",
         element: <Layout><Signup /></Layout>,
+    },
+    {
+        path: "/add-new-book",
+        element: <Layout><AddNewBook /></Layout>,
     },
 ]);
