@@ -1,11 +1,12 @@
-import BookCard from '../../components/BookCard/BookCard'
-import { Link } from 'react-router-dom';
+import React from 'react'
 import { useGetBooksQuery } from '../../redux/features/book/bookApi';
+import { Link } from 'react-router-dom';
 import { IBook } from '../../config/types';
+import BookCard from '../../components/BookCard/BookCard';
 
-const Home = () => {
+const AllBooks = () => {
 
-    // get books from redux api
+    // get roles from redux api
     const { data: books, isLoading, isError } = useGetBooksQuery(undefined);
 
     if (isError) {
@@ -30,10 +31,10 @@ const Home = () => {
             <hr />
 
             {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px] mt-6'>
-                {books?.data?.slice(0, 10).map((item: IBook) => <BookCard key={item._id} item={item} />)}
+                {books?.data.map((item: IBook) => <BookCard key={item._id} item={item} />)}
             </div>}
         </div>
     )
 }
 
-export default Home
+export default AllBooks

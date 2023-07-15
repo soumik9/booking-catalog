@@ -6,11 +6,12 @@ export const bookApi = apiSlice.injectEndpoints({
 
         // all books endpoint here
         getBooks: builder.query({
-            query: () => 'book',
+            query: () => `book?sortBy=createdAt&sortOrder=asc`,
             keepUnusedDataFor: 600,
             providesTags: ['Books'],
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+            async onQueryStarted(arg, { queryFulfilled }) {
                 try {
+                    console.log(arg);
                     await queryFulfilled;
                 } catch (error: any) {
                     toast.error(error.error.data.message);
