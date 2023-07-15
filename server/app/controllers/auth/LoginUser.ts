@@ -11,24 +11,24 @@ import User from '../../models/UserModel';
 const LoginUser: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
 
-        const phoneNumber = req.body.phoneNumber;
+        const email = req.body.phoneNumber;
         const password = req.body.password;
 
         // checking is admin exists
-        const isUserExists = await User.isUserExist(phoneNumber);
-        if (!isUserExists) throw new ApiError(httpStatus.NOT_FOUND, 'Admin does not exist');
+        const isUserExists = await User.isUserExist(email);
+        if (!isUserExists) throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
 
         // checking is password valid
-        // if (isUserExists.password && !(await Admin.isPasswordMatched(password, isUserExists.password))) {
-        //     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
-        // }
+        if (isUserExists.password && !(await User.isPasswordMatched(password, isUserExists.password))) {
+            throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
+        }
 
         // destructing 
-        const { _id, role } = isUserExists;
+        const { _id } = isUserExists;
 
         // creating accesstoken & refreshtoken
-        const accessToken = createToken({ _id, role }, process.env.JWT_SECRET as Secret, process.env.JWT_EXPIRES_IN as string);
-        const refreshToken = createToken({ _id, role }, process.env.JWT_REFRESH_SECRET as Secret, process.env.JWT_REFRESH_EXPIRES_IN as string);
+        const accessToken = createToken({ _id }, process.env.JWT_SECRET as Secret, process.env.JWT_EXPIRES_IN as string);
+        const refreshToken = createToken({ _id }, process.env.JWT_REFRESH_SECRET as Secret, process.env.JWT_REFRESH_EXPIRES_IN as string);
 
         // set refresh token into cookie
         const cookieOptions = {
