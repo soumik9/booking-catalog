@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IUser, UserModel } from '../../interfaces/modelTypes';
 import bcrypt from 'bcrypt';
+import { CUserRole } from '../../utils/constatnts';
 
 const userSchema = new Schema<IUser, UserModel, {}>({
     name: {
@@ -14,6 +15,14 @@ const userSchema = new Schema<IUser, UserModel, {}>({
     password: {
         type: String,
         required: [true, 'Password is required']
+    },
+    role: {
+        type: String,
+        enum: {
+            values: CUserRole,
+            message: "Status value can not be {VALUE}, must be user"
+        },
+        required: [true, 'Role is required']
     },
 }, { timestamps: true });
 
