@@ -8,8 +8,8 @@ import Book from '../../models/BookModel';
 const GetBook: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
 
-        // creating new user
-        const result = await Book.findById(req.params.id).populate('review');
+        // creating new book
+        const result = await Book.findOne({ _id: req.params.id });
 
         sendResponse<IBook>(res, {
             statusCode: httpStatus.OK,

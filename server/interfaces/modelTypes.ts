@@ -25,4 +25,10 @@ export interface IBook {
     publication_date: string;
     reviews: Types.ObjectId[];
 }
+
+export interface IReview {
+    _id?: Types.ObjectId | undefined | string;
+    desc: string;
+    user: Types.ObjectId;
+}
 // -------------------- book types -----------------------------------------
