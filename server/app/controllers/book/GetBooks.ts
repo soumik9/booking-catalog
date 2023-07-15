@@ -13,7 +13,7 @@ const GetBooks: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         const andConditions: any = [];
         const filters = pick(req.query, bookFilterableFields);
-        const { searchTerm, minPrice, maxPrice, ...filtersData } = filters;
+        const { searchTerm, ...filtersData } = filters;
 
         // pagination and sorting
         const paginationOptions = pick(req.query, paginationProps);
