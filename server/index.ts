@@ -1,7 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-import routes from './utils/routes';
+import routes from './app/routes/routes';
 import globalErrorHandler from './utils/globalErrorHandler';
 import httpStatus from 'http-status';
 import { Server } from 'http';
