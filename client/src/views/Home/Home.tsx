@@ -1,7 +1,17 @@
 import BookCard from '../../components/BookCard/BookCard'
 import { Link } from 'react-router-dom';
+import { useGetBooksQuery } from '../../redux/features/book/bookApi';
+import { IBook } from '../../config/types';
 
 const Home = () => {
+
+    // get roles from redux api
+    const { data: books, isLoading, isError } = useGetBooksQuery(undefined);
+
+    if (isError) {
+        return <>Error</>
+    }
+
     return (
         <div className='container'>
 
@@ -13,9 +23,10 @@ const Home = () => {
                 </Link>
             </div>
 
-            <div className='grid grid-cols-4 gap-[20px]'>
-                <BookCard />
-            </div>
+            {isLoading ? <>Loading...</> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px]'>
+                {books?.data.map((item: IBook) => <BookCard key={item._id} item={item} />)}
+            </div>}
+
 
         </div>
     )
