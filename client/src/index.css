@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+    @apply 3xl:px-[375px] xll:px-[135px] lg:px-[80px] md:px-[40px] px-[20px] mx-auto max-w-full;
+}
+
+.f-center {
+    @apply flex justify-center items-start;
+}
+
+.trans {
+    @apply transition ease-in-out duration-300;
+}

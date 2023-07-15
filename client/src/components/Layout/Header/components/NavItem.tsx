@@ -1,8 +1,11 @@
-import React from 'react'
+import { linkTypes } from '../../../../config/types'
+import { Link } from 'react-router-dom';
 
-const NavItem = () => {
+const NavItem = ({ item }: { item: linkTypes }) => {
     return (
-        <div>NavItem</div>
+        <Link to={item.url} className='text-primary-100 hover:text-white trans'>
+            {item.title}
+        </Link>
     )
 }
 
