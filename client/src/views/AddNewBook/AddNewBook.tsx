@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { useCreateBookMutation } from '../../redux/features/book/bookApi';
 
 const validationSchema = yup.object().shape({
     title: yup.string().required('Email is required'),
@@ -11,12 +12,18 @@ const validationSchema = yup.object().shape({
 
 const AddNewBook = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    // global
+    const [createBook, { isLoading }] = useCreateBookMutation();
+
+    // use hook form
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(validationSchema),
     });
 
+    // submit
     const onSubmit = (data: any) => {
-        console.log(data);
+        createBook(data);
+        reset();
     };
 
     return (
@@ -69,7 +76,7 @@ const AddNewBook = () => {
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 focus:outline-none focus:bg-primary trans"
                         >
-                            Add Now
+                            {isLoading ? 'Loadiing' : 'Add Now'}
                         </button>
                     </form>
                 </div>

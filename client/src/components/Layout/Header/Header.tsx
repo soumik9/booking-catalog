@@ -60,11 +60,11 @@ const Header = () => {
 
             {/* mobile navbar menu */}
             <div className={`navbar-menu relative md:z-[99] z-[999] lg:hidden ${showSideNav ? "block" : "hidden"}`} >
-                <MobileHumburgerMenu
+                {/* <MobileHumburgerMenu
                     handleSideNav={handleSideNav}
                     setShowSideNav={setShowSideNav}
                     showSideNav={showSideNav}
-                />
+                /> */}
             </div>
         </>
     )

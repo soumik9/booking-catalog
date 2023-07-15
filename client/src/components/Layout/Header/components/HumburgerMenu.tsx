@@ -20,13 +20,13 @@ const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav }: Props) => {
         <nav className="flex flex-col md:w-full w-[285px] h-full py-[40px] bg-white overflow-y-auto relative ">
           <div className="md:mt-[60px] mt-[30px]">
             <ul>
-              {navItems.map((item: linkTypes, index: number) => (<>p</>
-                // <MobileNavItem
-                //   key={index}
-                //   item={item}
-                //   setShowSideNav={setShowSideNav}
-                // />
-              ))}
+              {/* {navItems.map((item: linkTypes, index: number) => (<>p</>
+                <MobileNavItem
+                  key={index}
+                  item={item}
+                  setShowSideNav={setShowSideNav}
+                />
+              ))} */}
             </ul>
           </div>
         </nav>
