@@ -1,26 +1,30 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDeleteBookMutation, useGetBookQuery } from '../../redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
+import { homeUrl } from '../../config/constants';
 
 const BookDetails = () => {
 
     const { bookId } = useParams();
+    const navigate = useNavigate();
 
     // get books from redux api
     const { data: book, isLoading, isError } = useGetBookQuery(bookId);
-    const [deleteBook, { data: getAPIData, isLoading: deleteLoading }] = useDeleteBookMutation(undefined);
+    const [deleteBook, { isLoading: deleteLoading }] = useDeleteBookMutation(undefined);
 
     // deleting
-    const handleDelete = (e: any): any => {
+    const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        deleteBook(book?.data?._id);
-        if (getAPIData?.success === true) {
-            window.location.href = '/'
+        try {
+            await deleteBook(book?.data?._id);
+            navigate(homeUrl);
+        } catch (error) {
+            console.error('Error deleting book:', error);
         }
     }
 
     if (isLoading || deleteLoading) {
-        return <div className='f-center'>Loading...</div>
+        return <div className='f-center'>{isLoading ? 'Loading...' : 'Deleting'}</div>
     }
     if (isError) {
         return <div className='f-center'>Error...</div>
