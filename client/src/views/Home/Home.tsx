@@ -6,7 +6,7 @@ import { IBook } from '../../config/types';
 const Home = () => {
 
     // get books from redux api
-    const { data: books, isLoading, isError } = useGetBooksQuery(undefined);
+    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: 10 });
 
     if (isError) {
         return <>Error</>
@@ -30,7 +30,7 @@ const Home = () => {
             <hr />
 
             {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px] mt-6'>
-                {books?.data?.slice(0, 10).map((item: IBook) => <BookCard key={item._id} item={item} />)}
+                {books?.data?.map((item: IBook) => <BookCard key={item._id} item={item} />)}
             </div>}
         </div>
     )

@@ -6,6 +6,7 @@ import Signin from "../views/Signin/Signin";
 import AddNewBook from "../views/AddNewBook/AddNewBook";
 import BookDetails from "../views/BookDetails/BookDetails";
 import EditBook from "../views/EditBook/EditBook";
+import AllBooks from "../views/AllBooks/AllBooks";
 
 export const router = createBrowserRouter([
     {
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/all-books",
-        element: <Layout><Home /></Layout>,
+        element: <Layout><AllBooks /></Layout>,
     },
     {
         path: "/book/:bookId",

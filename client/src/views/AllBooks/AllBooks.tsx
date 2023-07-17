@@ -1,4 +1,3 @@
-import React from 'react'
 import { useGetBooksQuery } from '../../redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
 import { IBook } from '../../config/types';
@@ -7,7 +6,7 @@ import BookCard from '../../components/BookCard/BookCard';
 const AllBooks = () => {
 
     // get roles from redux api
-    const { data: books, isLoading, isError } = useGetBooksQuery(undefined);
+    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: undefined });
 
     if (isError) {
         return <>Error</>
@@ -30,7 +29,7 @@ const AllBooks = () => {
 
             <hr />
 
-            {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px] mt-6'>
+            {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px] mt-6 pb-10'>
                 {books?.data.map((item: IBook) => <BookCard key={item._id} item={item} />)}
             </div>}
         </div>
