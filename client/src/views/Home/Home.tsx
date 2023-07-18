@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <div className='container'>
 
-            <div className="mt-6 flex justify-between my-6">
+            <div className="mt-6 flex items-center justify-between my-6">
                 <div>
                     <p>Showing total result: {books?.data?.length} of {books?.meta?.total ? books?.meta?.total : '0'}</p>
                 </div>
@@ -27,9 +27,10 @@ const Home = () => {
                 </Link>
             </div>
 
+            <h1 className='text-[28px] text-center mb-1 text-primary font-semibold'>Top 10 Latest Books</h1>
             <hr />
 
-            {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid grid-cols-4 gap-x-[20px] gap-y-[30px] mt-6'>
+            {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : <div className='grid md:grid-cols-2 lg:grid-cols-3 xll:grid-cols-4 gap-x-[20px] gap-y-[35px] mt-6'>
                 {books?.data?.map((item: IBook) => <BookCard key={item._id} item={item} />)}
             </div>}
         </div>

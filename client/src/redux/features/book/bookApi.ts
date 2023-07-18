@@ -6,7 +6,7 @@ export const bookApi = apiSlice.injectEndpoints({
 
         // all books endpoint here
         getBooks: builder.query({
-            query: ({ limit }) => `book?sortBy=createdAt&sortOrder=asc&limit=${limit}`,
+            query: ({ limit, search }) => `book?sortBy=createdAt&sortOrder=asc&limit=${limit}&searchTerm=${search}`,
             keepUnusedDataFor: 600,
             providesTags: ['Books'],
             async onQueryStarted(arg, { queryFulfilled }) {
