@@ -1,4 +1,4 @@
-import { linkTypes } from "./types";
+import { IGenre, linkTypes } from "./types";
 
 export const homeUrl: string = '/';
 export const allBooksUrl: string = '/all-books';
@@ -57,3 +57,16 @@ export const footerLinks: linkTypes[] = [
         url: allBooksUrl,
     },
 ]
+
+export const genres: IGenre[] = [
+    { _id: 1, genre: 'Mystery' },
+    { _id: 2, genre: 'Thriller' },
+    { _id: 3, genre: 'Romance' },
+    { _id: 4, genre: 'Emily White' },
+    { _id: 5, genre: 'Alex Turner' },
+    { _id: 6, genre: 'Matthew Gray' },
+    { _id: 7, genre: 'Drama' },
+    { _id: 8, genre: 'Fantasy' },
+    { _id: 9, genre: 'Sci-Fi' },
+    { _id: 10, genre: 'Adventure' },
+];

@@ -19,3 +19,8 @@ export interface IUser {
     email: string;
     passowrd?: string;
 }
+
+export interface IGenre {
+    _id: number;
+    genre: string;
+}
