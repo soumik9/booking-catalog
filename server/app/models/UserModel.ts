@@ -10,7 +10,8 @@ const userSchema = new Schema<IUser, UserModel, {}>({
     },
     email: {
         type: String,
-        required: [true, 'Email is required']
+        required: [true, 'Email is required'],
+        unique: true
     },
     password: {
         type: String,
@@ -22,7 +23,7 @@ const userSchema = new Schema<IUser, UserModel, {}>({
             values: CUserRole,
             message: "Status value can not be {VALUE}, must be user"
         },
-        required: [true, 'Role is required']
+        default: 'user'
     },
 }, { timestamps: true });
 
