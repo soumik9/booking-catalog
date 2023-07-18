@@ -12,3 +12,10 @@ export interface IBook {
     publication_date: string;
     reviews?: string[];
 }
+
+export interface IUser {
+    _id?: undefined | string;
+    name: string;
+    email: string;
+    passowrd?: string;
+}
