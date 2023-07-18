@@ -10,5 +10,5 @@ export interface IBook {
     author: string;
     genre: string;
     publication_date: string;
-    reviews: string[];
+    reviews?: string[];
 }
