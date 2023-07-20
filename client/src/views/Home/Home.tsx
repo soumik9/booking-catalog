@@ -6,7 +6,7 @@ import { IBook } from '../../config/types';
 const Home = () => {
 
     // get books from redux api
-    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: 10 });
+    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: 10, search: undefined, isLatest: true });
 
     if (isError) {
         return <>Error</>

@@ -12,7 +12,7 @@ const AllBooks = () => {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
     // get roles from redux api
-    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: undefined, search: searchValue });
+    const { data: books, isLoading, isError } = useGetBooksQuery({ limit: undefined, search: searchValue, isLatest: false });
 
     useEffect(() => {
         if (selectedGenres.length) {
