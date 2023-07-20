@@ -1,4 +1,4 @@
-import { IGenre, linkTypes } from "./types";
+import { IGenre, IYear, linkTypes } from "./types";
 
 export const homeUrl: string = '/';
 export const allBooksUrl: string = '/all-books';
@@ -69,4 +69,11 @@ export const genres: IGenre[] = [
     { _id: 8, genre: 'Fantasy' },
     { _id: 9, genre: 'Sci-Fi' },
     { _id: 10, genre: 'Adventure' },
+];
+
+export const years: IYear[] = [
+    { _id: 'year1', year: '2020' },
+    { _id: 'year2', year: '2021' },
+    { _id: 'year3', year: '2022' },
+    { _id: 'year4', year: '2023' },
 ];

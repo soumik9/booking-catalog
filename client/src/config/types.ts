@@ -9,7 +9,7 @@ export interface IBook {
     title: string;
     author: string;
     genre: string;
-    publication_date: string;
+    publication_date: any;
     reviews?: string[];
 }
 
@@ -23,4 +23,9 @@ export interface IUser {
 export interface IGenre {
     _id: number;
     genre: string;
+}
+
+export interface IYear {
+    _id: string;
+    year: string;
 }

@@ -9,9 +9,13 @@ import { IBook } from '../../config/types';
 
 const validationSchema = yup.object().shape({
     title: yup.string().required('Email is required'),
-    author: yup.string().required('Password is required'),
-    genre: yup.string().required('Password is required'),
-    publication_date: yup.string().required('Password is required'),
+    author: yup.string().required('author is required'),
+    genre: yup.string().required('Genre is required'),
+    publication_date: yup.object().shape({
+        date: yup.string().required('Date is required'),
+        month: yup.string().required('Month is required'),
+        year: yup.string().required('Year is required')
+    }).required('Publication Date is required'),
 });
 
 const EditBook = () => {

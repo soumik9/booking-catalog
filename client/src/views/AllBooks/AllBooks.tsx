@@ -1,27 +1,36 @@
 import { useGetBooksQuery } from '../../redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
-import { IBook, IGenre } from '../../config/types';
+import { IBook, IGenre, IYear } from '../../config/types';
 import BookCard from '../../components/BookCard/BookCard';
 import { useEffect, useState } from 'react';
-import { genres } from '../../config/constants';
+import { genres, years } from '../../config/constants';
+import FilterCheckbox from './components/FilterCheckbox';
 
 const AllBooks = () => {
     // states
     const [searchValue, setSearchValue] = useState<string>('');
     const [datas, setDatas] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedYears, setSelectedYears] = useState<string[]>([]);
 
     // get roles from redux api
     const { data: books, isLoading, isError } = useGetBooksQuery({ limit: undefined, search: searchValue, isLatest: false });
 
+    // filtering data by publication year and genre
     useEffect(() => {
-        if (selectedGenres.length) {
-            const filteredBooks = books?.data?.filter((item: IBook) => selectedGenres.includes(item.genre)) || [];
+        if (selectedGenres.length || selectedYears.length) {
+            const filteredBooks = books?.data?.filter((item: IBook) => {
+                const publicationYear = new Date(item.publication_date).getFullYear().toString();
+                return (
+                    (selectedGenres.length === 0 || selectedGenres.includes(item.genre)) &&
+                    (selectedYears.length === 0 || selectedYears.includes(publicationYear))
+                );
+            }) || [];
             setDatas(filteredBooks);
         } else {
             setDatas(books?.data)
         }
-    }, [selectedGenres, books?.data]);
+    }, [selectedGenres, books?.data, selectedYears]);
 
     // handle checkbox
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +41,16 @@ const AllBooks = () => {
             setSelectedGenres((prevSelectedGenres) => prevSelectedGenres.filter((g) => g !== genre));
         }
     };
+
+    const handleCheckboxYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const genre = e.target.value;
+        if (e.target.checked) {
+            setSelectedYears((prevSelectedGenres) => [...prevSelectedGenres, genre]);
+        } else {
+            setSelectedYears((prevSelectedGenres) => prevSelectedGenres.filter((g) => g !== genre));
+        }
+    };
+
     if (isError) {
         return <>Error</>;
     }
@@ -55,21 +74,29 @@ const AllBooks = () => {
 
             {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : (
                 <div className='grid grid-cols-4'>
-                    <div className='mt-5 flex flex-col gap-2 relative'>
-                        {genres.map((item: IGenre, index: number) => (
-                            <div key={item._id}>
-                                <label className="flex items-center space-x-2 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        className="appearance-none cursor-pointer w-6 h-6 border border-primary-300 rounded-md checked:bg-primary checked:border-primary focus:outline-none"
-                                        checked={selectedGenres.includes(item.genre)}
-                                        onChange={handleCheckboxChange}
-                                        value={item.genre}
-                                    />
-                                    {selectedGenres.includes(item.genre) && <span className='absolute left-[-1px] text-white'>&#x2713;</span>}
-                                    <span className="text-primary">{item.genre}</span>
-                                </label>
-                            </div>
+                    <div className='mt-5 flex flex-col gap-2'>
+                        <p>Genres</p>
+                        <hr className='mb-2' />
+                        {genres.map((item: IGenre) => (<div key={item._id}>
+                            <FilterCheckbox
+                                value={item.genre}
+                                checked={selectedGenres.includes(item.genre)}
+                                onChange={handleCheckboxChange}
+                                selectedItems={selectedGenres}
+                            />
+                        </div>
+                        ))}
+
+                        <p className='mt-4'>Year</p>
+                        <hr className='mb-2' />
+                        {years.map((item: IYear) => (<div key={item._id}>
+                            <FilterCheckbox
+                                value={item.year}
+                                checked={selectedYears.includes(item.year)}
+                                onChange={handleCheckboxYear}
+                                selectedItems={selectedGenres}
+                            />
+                        </div>
                         ))}
                     </div>
 
