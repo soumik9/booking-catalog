@@ -11,16 +11,16 @@ import User from '../../models/UserModel';
 const LoginUser: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
 
-        const email = req.body.phoneNumber;
+        const email = req.body.email;
         const password = req.body.password;
 
         // checking is admin exists
         const isUserExists = await User.isUserExist(email);
-        if (!isUserExists) throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
+        if (!isUserExists) throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist!');
 
         // checking is password valid
         if (isUserExists.password && !(await User.isPasswordMatched(password, isUserExists.password))) {
-            throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
+            throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect!');
         }
 
         // destructing 
@@ -44,6 +44,7 @@ const LoginUser: RequestHandler = catchAsync(
             message: 'User logged in successfully!',
             data: {
                 accessToken,
+                user: isUserExists
             }
         });
     }

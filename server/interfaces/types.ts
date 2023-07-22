@@ -1,4 +1,5 @@
 import { SortOrder } from 'mongoose';
+import { IUser } from './modelTypes';
 
 export type IErrorMessage = {
     path: string | number;
@@ -40,4 +41,5 @@ export interface IPaginationOptionsResult {
 
 export interface ILoginResponse {
     accessToken: string;
+    user: Partial<IUser>
 }
