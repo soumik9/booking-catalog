@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Toaster
@@ -18,7 +19,7 @@ root.render(
       reverseOrder={false}
     />
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} />d
     </Provider>
   </React.StrictMode>
 );

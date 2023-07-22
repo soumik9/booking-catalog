@@ -54,20 +54,20 @@ export const authApi = apiSlice.injectEndpoints({
             }
         }),
 
-        // // get profile endpoint here
-        // getProfile: builder.query({
-        //     query: (userId) => `profile/${userId}`,
-        //     providesTags: ['Profile'],
-        //     async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        //         try {
-        //             const result = await queryFulfilled;
-        //             dispatch(profileLog(result.data.user));
-        //         } catch (error: any) {
-        //             console.log(error, 'profile');
-        //             toast.error(error.error.data.message);
-        //         }
-        //     }
-        // }),
+        // get profile endpoint here
+        getProfile: builder.query({
+            query: (userId) => `auth/profile`,
+            providesTags: ['Profile'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(profileLog(result.data.user));
+                } catch (error: any) {
+                    console.log(error, 'profile');
+                    toast.error(error.error.data.message);
+                }
+            }
+        }),
 
     })
 });
