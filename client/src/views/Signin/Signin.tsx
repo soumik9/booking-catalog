@@ -5,6 +5,7 @@ import { useLoginMutation } from '../../redux/features/auth/authApi';
 import { useNavigate } from 'react-router-dom';
 import { homeUrl } from '../../config/constants';
 import { useEffect } from 'react';
+import { useAppSelector } from '../../config/helpers';
 
 const validationSchema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid email'),
@@ -16,6 +17,7 @@ const Signin = () => {
     const navigate = useNavigate();
 
     // hooks
+    const auth = useAppSelector((state) => state.auth);
     const [login, { isLoading, isSuccess }] = useLoginMutation();
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(validationSchema) });
 
@@ -26,7 +28,15 @@ const Signin = () => {
         }
     }, [isSuccess, navigate])
 
-    const onSubmit = (data: any) => {
+
+    // if authenticated then redirect to dashboard
+    useEffect(() => {
+        if (auth.isAuthenticated) {
+            navigate(homeUrl)
+        }
+    }, [auth.isAuthenticated, navigate])
+
+    const handleLogin = (data: any) => {
         login(data);
     };
 
@@ -35,7 +45,7 @@ const Signin = () => {
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
                     <h2 className="text-2xl font-semibold text-center">Sign In</h2>
-                    <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+                    <form onSubmit={handleSubmit(handleLogin)} className="mt-4">
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-700">Email</label>
                             <input
