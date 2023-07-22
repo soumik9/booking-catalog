@@ -11,7 +11,6 @@ export const bookApi = apiSlice.injectEndpoints({
             providesTags: ['Books'],
             async onQueryStarted(arg, { queryFulfilled }) {
                 try {
-                    console.log(arg);
                     await queryFulfilled;
                 } catch (error: any) {
                     toast.error(error.error.data.message);

@@ -1,6 +1,10 @@
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLoginMutation } from '../../redux/features/auth/authApi';
+import { useNavigate } from 'react-router-dom';
+import { homeUrl } from '../../config/constants';
+import { useEffect } from 'react';
 
 const validationSchema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid email'),
@@ -8,12 +12,22 @@ const validationSchema = yup.object().shape({
 });
 
 const Signin = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(validationSchema),
-    });
+
+    const navigate = useNavigate();
+
+    // hooks
+    const [login, { isLoading, isSuccess }] = useLoginMutation();
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(validationSchema) });
+
+    // if api call success then redirect to dashboard
+    useEffect(() => {
+        if (isSuccess) {
+            navigate(homeUrl)
+        }
+    }, [isSuccess, navigate])
 
     const onSubmit = (data: any) => {
-        console.log(data);
+        login(data);
     };
 
     return (
@@ -46,7 +60,7 @@ const Signin = () => {
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 focus:outline-none focus:bg-primary trans"
                         >
-                            Sign In
+                            {isLoading ? 'Signing In' : 'Sign In'}
                         </button>
                     </form>
                 </div>

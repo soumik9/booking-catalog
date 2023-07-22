@@ -27,7 +27,7 @@ export const authApi = apiSlice.injectEndpoints({
         // login endpoint here
         login: builder.mutation({
             query: (data) => ({
-                url: 'login',
+                url: 'auth/login',
                 method: 'POST',
                 body: data
             }),
@@ -35,6 +35,7 @@ export const authApi = apiSlice.injectEndpoints({
                 try {
 
                     const result = await queryFulfilled;
+                    console.log(result.data);
 
                     // setting logged data to redux state
                     dispatch(userLoggedIn({
@@ -46,7 +47,7 @@ export const authApi = apiSlice.injectEndpoints({
                     // setting cookies
                     Cookies.set('accessToken', result.data.data.accessToken, { expires: arg.rememberMe ? 30 : 1 });
                     Cookies.set('_id', result.data.data.user._id, { expires: arg.rememberMe ? 30 : 1 });
-                    toast.success(result.data.data.message);
+                    toast.success(result.data.message);
                 } catch (error: any) {
                     toast.error(error.error.data.message)
                 }
