@@ -11,6 +11,7 @@ export interface IBook {
     genre: string;
     publication_date: any;
     reviews?: string[];
+    addedBy?: string | IUser;
 }
 
 export interface IUser {

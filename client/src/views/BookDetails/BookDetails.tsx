@@ -17,7 +17,7 @@ const BookDetails = () => {
 
     // get books from redux api
     const { data: book, isLoading, isError } = useGetBookQuery(bookId);
-    const [deleteBook, { isLoading: deleteLoading }] = useDeleteBookMutation(undefined);
+    const [deleteBook, { isLoading: deleteLoading, isSuccess }] = useDeleteBookMutation(undefined);
 
     // loading || error
     if (isLoading) {
@@ -44,13 +44,13 @@ const BookDetails = () => {
                             />
                         </Link>
 
-                        <button
-                            type='button'
-                            className="px-4 py-2 text-white bg-error rounded-md hover:bg-error-hover trans focus:outline-none"
-                            onClick={() => sendDeleteRequest(book?.data?._id, deleteBook)}
-                        >
-                            {deleteLoading ? 'Deleting' : 'Delete'}
-                        </button>
+
+                        <Button
+                            disabled={!auth.isAuthenticated}
+                            text={auth.isAuthenticated ? deleteLoading ? 'Deleting' : 'Delete' : 'Please Login'}
+                            onClick={() => sendDeleteRequest(book?.data?._id, deleteBook, isSuccess)}
+                            classes='!bg-error hover:!bg-error-hover disabled:!bg-gray-300'
+                        />
                     </div>
                 </div>
             </div>

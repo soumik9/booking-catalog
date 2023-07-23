@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useCreateBookMutation } from '../../redux/features/book/bookApi';
 import CardLayoutScreen from '../../components/CardLayout/CardLayoutScreen';
+import { IBook } from '../../config/types';
+import { useAppSelector } from '../../config/helpers';
 
 const validationSchema = yup.object().shape({
     title: yup.string().required('Email is required'),
@@ -14,6 +16,7 @@ const validationSchema = yup.object().shape({
 const AddNewBook = () => {
 
     // global
+    const auth = useAppSelector((state) => state.auth);
     const [createBook, { isLoading }] = useCreateBookMutation();
 
     // use hook form
@@ -22,8 +25,8 @@ const AddNewBook = () => {
     });
 
     // submit
-    const onSubmit = (data: any) => {
-        createBook(data);
+    const onSubmit = (data: IBook) => {
+        createBook({ ...data, addedBy: auth._id });
         reset();
     };
 

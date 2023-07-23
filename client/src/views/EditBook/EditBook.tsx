@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useEffect } from 'react';
 import { IBook } from '../../config/types';
+import { useAppSelector } from '../../config/helpers';
 
 const validationSchema = yup.object().shape({
     title: yup.string().required('Email is required'),
@@ -20,9 +21,7 @@ const EditBook = () => {
     const { bookId } = useParams();
 
     // use hook form
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm({
-        resolver: yupResolver(validationSchema),
-    });
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: yupResolver(validationSchema) });
 
     // get books from redux api
     const { data: book, isLoading, isError } = useGetBookQuery(bookId);

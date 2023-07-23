@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 import Cookies from 'js-cookie';
-import { profileLog, userLoggedIn } from "./authSlice";
+import { userLoggedIn } from "./authSlice";
 import toast from 'react-hot-toast';
 
 export const authApi = apiSlice.injectEndpoints({
