@@ -1,16 +1,21 @@
 import React, { MouseEventHandler } from "react";
 import { navItems } from "../../../../config/constants";
 import { linkTypes } from "../../../../config/types";
+import MobileNavItem from "./MobileNavItem";
+import { useAppSelector } from "../../../../config/helpers";
+import { AiOutlineClose } from "react-icons/ai";
 
 type Props = {
   handleSideNav: MouseEventHandler<HTMLButtonElement>;
   setShowSideNav: (showSideNav: boolean) => void;
   showSideNav: boolean;
+  handleLogout: any;
 };
 
-const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav }: Props) => {
-  // const router = useRouter();
-  // const [orderCurrentTab, setOrderCurrentTab] = useAtom(orderPageTab);
+const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav, handleLogout }: Props) => {
+
+  // globals
+  const auth = useAppSelector((state) => state.auth);
 
   return (
     <>
@@ -20,13 +25,27 @@ const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav }: Props) => {
         <nav className="flex flex-col md:w-full w-[285px] h-full py-[40px] bg-white overflow-y-auto relative ">
           <div className="md:mt-[60px] mt-[30px]">
             <ul>
-              {/* {navItems.map((item: linkTypes, index: number) => (<>p</>
+              {auth.isAuthenticated ? navItems.slice(0, 1).map((item: linkTypes) => (
                 <MobileNavItem
-                  key={index}
+                  key={item._id}
                   item={item}
                   setShowSideNav={setShowSideNav}
                 />
-              ))} */}
+              )) : navItems.map((item: linkTypes) => (
+                <MobileNavItem
+                  key={item._id}
+                  item={item}
+                  setShowSideNav={setShowSideNav}
+                />
+              ))}
+              {auth.isAuthenticated && <button
+                type='button'
+                onClick={handleLogout}
+                className='text-white mx-[40px] bg-primary-700 px-5 py-2 rounded-md'
+              >
+                Logout
+              </button>}
+
             </ul>
           </div>
         </nav>
@@ -36,8 +55,7 @@ const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav }: Props) => {
           className="md:hidden block absolute right-3 top-[10px] cursor-pointer"
           onClick={() => setShowSideNav(false)}
         >
-          {/* <MobileCloseBtn /> */}
-          x
+          <AiOutlineClose className="text-primary text-[18px]" />
         </div>
       </div>
     </>

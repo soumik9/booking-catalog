@@ -15,8 +15,8 @@ const BodyHead = ({ totalLength, showingLength, title }: Props) => {
 
     return (
         <>
-            <div className="mt-6 flex items-center justify-between my-6">
-                <div>
+            <div className="mt-6 flex flex-col md:flex-row items-center justify-between my-6">
+                <div className='mb-2 md:mb-0'>
                     <p>Showing total result: {totalLength} of {showingLength}</p>
                 </div>
 

@@ -59,7 +59,6 @@ const AllBooks = () => {
     return (
         <div className='container'>
 
-
             <BodyHead
                 totalLength={books?.data?.length}
                 showingLength={books?.meta?.total ? books?.meta?.total : 0}
@@ -67,9 +66,10 @@ const AllBooks = () => {
             />
 
             {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : (
-                <div className='grid grid-cols-4 gap-5'>
-                    <div className='mt-5 flex flex-col gap-2'>
-                        <p>Genres</p>
+                <div className='grid lg:grid-cols-4 grid-cols-5 gap-5 mt-2 lg:mt-0'>
+
+                    <div className='mt-5 flex flex-col gap-2 col-span-2 lg:col-span-1'>
+                        <p className='mb-1'>Genres</p>
                         <hr className='mb-2' />
                         {genres.map((item: IGenre) => (<div key={item._id}>
                             <FilterCheckbox
@@ -103,7 +103,7 @@ const AllBooks = () => {
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
 
-                        <div className='grid grid-cols-3 gap-x-[20px] gap-y-[30px] mt-6 pb-10'>
+                        <div className='grid md:grid-cols-2 xll:grid-cols-3 gap-x-[20px] gap-y-[30px] mt-6 pb-10'>
                             {datas?.map((item: IBook) => <BookCard key={item._id} item={item} />)}
                         </div>
                     </div>

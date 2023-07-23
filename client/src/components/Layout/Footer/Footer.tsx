@@ -10,9 +10,9 @@ const Footer = () => {
         <footer className="bg-primary-200 text-center text-primary-700 lg:text-left mt-10">
             <div className='container'>
 
-                <div className="mx-6 py-10 text-center md:text-left">
-                    <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div className="mx-6 pb-0 md:pb-10 py-10 text-center md:text-left">
 
+                    <div className="grid-1 grid gap-8 md:grid-cols-2 xll:grid-cols-4">
 
                         <div className="">
                             <h6 className="mb-4 flex gap-1 items-center justify-center font-semibold uppercase md:justify-start">
@@ -29,7 +29,7 @@ const Footer = () => {
                         <LinkGrid title='Useful links' links={footerLinks.slice(3, 6)} />
 
                         {/* Contact section */}
-                        <div>
+                        <div className=''>
                             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
                                 Contact
                             </h6>

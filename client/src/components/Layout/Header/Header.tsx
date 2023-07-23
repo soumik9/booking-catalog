@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../config/helpers';
 import { toast } from 'react-hot-toast';
 import { userLoggedOut } from '../../../redux/features/auth/authSlice';
 import { BsBookHalf } from 'react-icons/bs';
+import NavRight from './components/NavRight';
 
 // const authenticatedMenuItem = {
 //     url
@@ -72,7 +73,7 @@ const Header = () => {
                             </button>}
                         </ul>
 
-                        {/* <div className="lg:hidden flex gap-[30px]">
+                        <div className="lg:hidden flex">
                             <NavRight
                                 handleSideNav={handleSideNav}
                                 showHumburgerMenu={true}
@@ -81,26 +82,18 @@ const Header = () => {
                                 showSideNav={showSideNav}
                             />
                         </div>
-
-                        <div className="lg:block hidden ">
-                            <NavRight
-                                handleSideNav={handleSideNav}
-                                showHumburgerMenu={true}
-                                showCloseBtn={false}
-                                setShowSideNav={setShowSideNav}
-                            />
-                        </div> */}
                     </div>
                 </div>
             </div>
 
             {/* mobile navbar menu */}
             <div className={`navbar-menu relative md:z-[99] z-[999] lg:hidden ${showSideNav ? "block" : "hidden"}`} >
-                {/* <MobileHumburgerMenu
+                <MobileHumburgerMenu
                     handleSideNav={handleSideNav}
                     setShowSideNav={setShowSideNav}
                     showSideNav={showSideNav}
-                /> */}
+                    handleLogout={handleLogout}
+                />
             </div>
         </>
     )
