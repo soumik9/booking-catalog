@@ -45,7 +45,6 @@ export const bookApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
-                    console.log(result);
                     toast.success(result.data.message);
                 } catch (error: any) {
                     toast.error(error.error.data.message);
