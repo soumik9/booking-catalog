@@ -10,6 +10,10 @@ const reviewSchema = new Schema<IReview>({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    book: {
+        type: Schema.Types.ObjectId,
+        ref: "Book"
+    },
 }, { timestamps: true });
 
 const Review = model<IReview>("Review", reviewSchema);

@@ -30,5 +30,6 @@ export interface IReview {
     _id?: Types.ObjectId | undefined | string;
     desc: string;
     user: Types.ObjectId;
+    book: Types.ObjectId;
 }
 // -------------------- book types -----------------------------------------
