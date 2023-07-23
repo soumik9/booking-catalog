@@ -1,5 +1,4 @@
 import { useGetBooksQuery } from '../../redux/features/book/bookApi';
-import { Link } from 'react-router-dom';
 import { IBook, IGenre, IYear } from '../../config/types';
 import BookCard from '../../components/BookCard/BookCard';
 import { useEffect, useState } from 'react';

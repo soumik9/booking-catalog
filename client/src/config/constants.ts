@@ -5,6 +5,7 @@ export const allBooksUrl: string = '/all-books';
 export const signInUrl: string = '/signin';
 export const signUpUrl: string = '/signup';
 export const addNewBook: string = '/add-new-book';
+export const wishlistUrl: string = '/wishlist';
 
 // nav itmes
 export const navItems: linkTypes[] = [

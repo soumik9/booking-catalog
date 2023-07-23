@@ -8,6 +8,7 @@ import BookDetails from "../views/BookDetails/BookDetails";
 import EditBook from "../views/EditBook/EditBook";
 import AllBooks from "../views/AllBooks/AllBooks";
 import RequiredAuth from "../components/RequiredAuth/RequiredAuth";
+import Wishlist from "../views/Wishlist/Wishlist";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
     {
         path: "/edit-book/:bookId",
         element: <RequiredAuth><Layout><EditBook /></Layout></RequiredAuth>,
+    },
+    {
+        path: "/wishlist",
+        element: <Layout><Wishlist /></Layout>,
     },
     {
         path: "/signin",

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { ButtonHTMLAttributes } from 'react';
 
 type Props = {
-    text: string;
+    text: string | React.ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({ text, ...props }: Props) => {

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import React, { useState } from 'react'
-import { homeUrl, navItems } from '../../../config/constants';
+import { useState } from 'react'
+import { homeUrl, navItems, wishlistUrl } from '../../../config/constants';
 import { linkTypes } from '../../../config/types';
 import NavItem from './components/NavItem';
 import MobileHumburgerMenu from './components/HumburgerMenu';
@@ -10,10 +10,7 @@ import { toast } from 'react-hot-toast';
 import { userLoggedOut } from '../../../redux/features/auth/authSlice';
 import { BsBookHalf } from 'react-icons/bs';
 import NavRight from './components/NavRight';
-
-// const authenticatedMenuItem = {
-//     url
-// }
+import { GiSelfLove } from 'react-icons/gi'
 
 const Header = () => {
 
@@ -53,6 +50,12 @@ const Header = () => {
 
                         {/* desktop menu */}
                         <ul className="hidden lg:flex items-center lg:gap-x-[25px]">
+
+                            <Link to={wishlistUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
+                                Wishlist
+                                <GiSelfLove />
+                            </Link>
+
                             {auth.isAuthenticated ? navItems.slice(0, 1).map((item: linkTypes) => (
                                 <NavItem
                                     key={item._id}

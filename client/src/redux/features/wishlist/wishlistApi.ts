@@ -1,16 +1,16 @@
 import { apiSlice } from "../api/apiSlice";
 import toast from 'react-hot-toast';
 
-export const reviewApi = apiSlice.injectEndpoints({
+export const wishlistApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        createReview: builder.mutation({
+        createWishlist: builder.mutation({
             query: (data) => ({
-                url: 'review',
+                url: 'wishlist',
                 method: 'POST',
                 body: data
             }),
-            invalidatesTags: ["Reviews", "Books", "Book"],
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+            invalidatesTags: ["Profile", "Users"],
+            async onQueryStarted(arg, { queryFulfilled }) {
                 try {
                     const result = await queryFulfilled;
                     toast.success(result.data.message);
@@ -23,5 +23,5 @@ export const reviewApi = apiSlice.injectEndpoints({
 });
 
 export const {
-    useCreateReviewMutation,
-} = reviewApi;
+    useCreateWishlistMutation,
+} = wishlistApi;
