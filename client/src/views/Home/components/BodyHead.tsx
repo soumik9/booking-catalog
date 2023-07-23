@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../../config/helpers';
+import classNames from 'classnames';
 
 interface Props {
     totalLength: number;
@@ -7,6 +9,10 @@ interface Props {
 }
 
 const BodyHead = ({ totalLength, showingLength, title }: Props) => {
+
+    // global
+    const auth = useAppSelector((state) => state.auth);
+
     return (
         <>
             <div className="mt-6 flex items-center justify-between my-6">
@@ -15,8 +21,13 @@ const BodyHead = ({ totalLength, showingLength, title }: Props) => {
                 </div>
 
                 <Link to="/add-new-book">
-                    <button className="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 trans focus:outline-none">
-                        Add New Book
+                    <button
+                        className={classNames(
+                            "px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 trans focus:outline-none disabled:bg-primary-200 disabled:cursor-not-allowed",
+                        )}
+                        disabled={!auth.isAuthenticated}
+                    >
+                        {auth.isAuthenticated ? 'Add New Book' : 'Please Login'}
                     </button>
                 </Link>
             </div>

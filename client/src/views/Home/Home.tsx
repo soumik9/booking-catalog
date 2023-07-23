@@ -1,5 +1,4 @@
 import BookCard from '../../components/BookCard/BookCard'
-import { Link } from 'react-router-dom';
 import { useGetBooksQuery } from '../../redux/features/book/bookApi';
 import { IBook } from '../../config/types';
 import BodyHead from './components/BodyHead';

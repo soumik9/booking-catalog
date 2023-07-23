@@ -7,6 +7,7 @@ import AddNewBook from "../views/AddNewBook/AddNewBook";
 import BookDetails from "../views/BookDetails/BookDetails";
 import EditBook from "../views/EditBook/EditBook";
 import AllBooks from "../views/AllBooks/AllBooks";
+import RequiredAuth from "../components/RequiredAuth/RequiredAuth";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,6 @@ export const router = createBrowserRouter([
     },
     {
         path: "/add-new-book",
-        element: <Layout><AddNewBook /></Layout>,
+        element: <RequiredAuth><Layout><AddNewBook /></Layout></RequiredAuth>,
     },
 ]);
