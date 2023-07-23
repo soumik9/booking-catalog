@@ -52,7 +52,7 @@ const Signin = () => {
                                 type="email"
                                 id="email"
                                 {...register('email')}
-                                className="w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-blue-500"
+                                className="w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                             />
                             {errors.email && <p className="mt-1 text-red-500">{errors.email.message}</p>}
                         </div>
@@ -62,7 +62,7 @@ const Signin = () => {
                                 type="password"
                                 id="password"
                                 {...register('password')}
-                                className="w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-blue-500"
+                                className="w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
                             />
                             {errors.password && <p className="mt-1 text-red-500">{errors.password.message}</p>}
                         </div>

@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useDeleteBookMutation, useGetBookQuery } from '../../redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
 import useDelete from '../../config/hooks/useDelete';
+import ReviewBox from './components/ReviewBox';
 
 const BookDetails = () => {
 
@@ -48,6 +49,8 @@ const BookDetails = () => {
                     </div>
                 </div>
             </div>
+
+            <ReviewBox bookId={bookId} />
         </div>
     )
 }
