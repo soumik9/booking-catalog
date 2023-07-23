@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../config/helpers';
 import { toast } from 'react-hot-toast';
 import { userLoggedOut } from '../../../redux/features/auth/authSlice';
+import { BsBookHalf } from 'react-icons/bs';
 
 // const authenticatedMenuItem = {
 //     url
@@ -44,7 +45,10 @@ const Header = () => {
                 <div className="container">
                     <div className="flex justify-between items-center">
 
-                        <Link to={homeUrl} className='text-white'>Book Depository</Link>
+                        <Link to={homeUrl} className='text-white flex gap-2 items-center'>
+                            <BsBookHalf className='relative top-[1px]' />
+                            Book Depository
+                        </Link>
 
                         {/* desktop menu */}
                         <ul className="hidden lg:flex items-center lg:gap-x-[25px]">
