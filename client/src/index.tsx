@@ -19,7 +19,7 @@ root.render(
       reverseOrder={false}
     />
     <Provider store={store}>
-      <RouterProvider router={router} />d
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

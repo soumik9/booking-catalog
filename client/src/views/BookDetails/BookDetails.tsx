@@ -3,6 +3,8 @@ import { useDeleteBookMutation, useGetBookQuery } from '../../redux/features/boo
 import { Link } from 'react-router-dom';
 import useDelete from '../../config/hooks/useDelete';
 import ReviewBox from './components/ReviewBox';
+import Reviews from './components/Reviews';
+import { useAppSelector } from '../../config/helpers';
 
 const BookDetails = () => {
 
@@ -10,6 +12,7 @@ const BookDetails = () => {
 
     // hooks
     const { sendDeleteRequest } = useDelete();
+    const auth = useAppSelector((state) => state.auth);
 
     // get books from redux api
     const { data: book, isLoading, isError } = useGetBookQuery(bookId);
@@ -50,7 +53,10 @@ const BookDetails = () => {
                 </div>
             </div>
 
-            <ReviewBox bookId={bookId} />
+            <Reviews reviews={book?.data?.reviews} />
+
+            {auth.isAuthenticated && <ReviewBox bookId={bookId} />}
+
         </div>
     )
 }

@@ -28,8 +28,6 @@ const ReviewBox = ({ bookId }: Props) => {
             book: bookId,
             desc: review
         })
-
-
     }
 
     return (

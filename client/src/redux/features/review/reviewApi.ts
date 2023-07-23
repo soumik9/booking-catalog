@@ -41,7 +41,7 @@ export const reviewApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: data
             }),
-            invalidatesTags: ["Reviews"],
+            invalidatesTags: ["Reviews", "Books", "Book"],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
