@@ -25,6 +25,10 @@ const userSchema = new Schema<IUser, UserModel, {}>({
         },
         default: 'user'
     },
+    wishlists: [{
+        type: Schema.Types.ObjectId,
+        ref: "Wishlist"
+    }]
 }, { timestamps: true });
 
 // checking is admin exists

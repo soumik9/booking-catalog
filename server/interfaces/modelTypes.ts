@@ -7,6 +7,7 @@ export interface IUser {
     email: string;
     password: string;
     role: string;
+    wishlists: Types.ObjectId[] | IWishlist[];
 }
 
 export type UserModel = {
@@ -15,21 +16,24 @@ export type UserModel = {
 } & Model<IUser>;
 // -------------------- user types -----------------------------------------
 
-
-// -------------------- book types -----------------------------------------
 export interface IBook {
     _id?: Types.ObjectId | undefined | string;
     title: string;
     author: string;
     genre: string;
     publication_date: string;
-    reviews: Types.ObjectId[];
+    reviews: Types.ObjectId[] | IReview[];
 }
 
 export interface IReview {
-    _id?: Types.ObjectId | undefined | string;
+    _id?: Types.ObjectId | undefined | string
     desc: string;
-    user: Types.ObjectId;
-    book: Types.ObjectId;
+    user: Types.ObjectId | IUser;
+    book: Types.ObjectId | IBook;
 }
-// -------------------- book types -----------------------------------------
+
+export interface IWishlist {
+    _id?: Types.ObjectId | undefined | string
+    user: Types.ObjectId | IUser;
+    book: Types.ObjectId | IBook;
+}

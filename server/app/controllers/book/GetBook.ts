@@ -9,7 +9,11 @@ const GetBook: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
 
         // creating new book
-        const result = await Book.findOne({ _id: req.params.id });
+        const result = await Book.findOne({ _id: req.params.id }).populate('reviews');
+        await Book.populate(result, {
+            path: 'reviews.user',
+            model: 'User'
+        });
 
         sendResponse<IBook>(res, {
             statusCode: httpStatus.OK,

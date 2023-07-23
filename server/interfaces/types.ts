@@ -41,5 +41,5 @@ export interface IPaginationOptionsResult {
 
 export interface ILoginResponse {
     accessToken: string;
-    user: Partial<IUser>
+    user?: Partial<IUser>
 }
