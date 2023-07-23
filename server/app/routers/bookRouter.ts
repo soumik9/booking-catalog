@@ -6,12 +6,13 @@ import GetBook from '../controllers/book/GetBook';
 import CreateBook from '../controllers/book/CreateBook';
 import UpdateBook from '../controllers/book/UpdateBook';
 import DeleteBook from '../controllers/book/DeleteBook';
+import auth from '../middlewares/auth';
 
 //routes
-router.post('/', CreateBook);
+router.post('/', auth(), CreateBook);
 router.get('/:id', GetBook);
 router.get('/', GetBooks);
-router.patch('/:id', UpdateBook);
+router.patch('/:id', auth(), UpdateBook);
 router.delete('/:id', DeleteBook);
 
 export default router;

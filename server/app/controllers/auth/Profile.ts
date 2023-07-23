@@ -10,7 +10,13 @@ const Profile: RequestHandler = catchAsync(
     async (req: Request, res: Response): Promise<void> => {
 
         // get my profile user
-        const result = await User.findById(req?.user?._id);
+        const result = await User.findById(req?.user?._id).populate({
+            path: 'wishlists',
+            populate: { path: 'book' }
+        }).populate({
+            path: 'currentPlans',
+            populate: { path: 'book' }
+        });
 
         sendResponse<IUser>(res, {
             statusCode: httpStatus.OK,

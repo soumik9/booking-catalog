@@ -8,6 +8,7 @@ export interface IUser {
     password: string;
     role: string;
     wishlists: Types.ObjectId[] | IWishlist[];
+    currentPlans: Types.ObjectId[] | ICurrentPlan[];
 }
 
 export type UserModel = {
@@ -36,4 +37,8 @@ export interface IWishlist {
     _id?: Types.ObjectId | undefined | string
     user: Types.ObjectId | IUser;
     book: Types.ObjectId | IBook;
+}
+
+export interface ICurrentPlan extends IWishlist {
+    isFinished: boolean;
 }

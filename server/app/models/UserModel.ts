@@ -28,12 +28,22 @@ const userSchema = new Schema<IUser, UserModel, {}>({
     wishlists: [{
         type: Schema.Types.ObjectId,
         ref: "Wishlist"
+    }],
+    currentPlans: [{
+        type: Schema.Types.ObjectId,
+        ref: "CurrentPlan"
     }]
 }, { timestamps: true });
 
 // checking is admin exists
 userSchema.statics.isUserExist = async function (param: string): Promise<Partial<IUser> | null> {
-    return await this.findOne({ email: param }).select('password').exec();
+    return await this.findOne({ email: param }).populate({
+        path: 'wishlists',
+        populate: { path: 'book' }
+    }).populate({
+        path: 'currentPlan',
+        populate: { path: 'book' }
+    });
 }
 
 // checking is password matched
