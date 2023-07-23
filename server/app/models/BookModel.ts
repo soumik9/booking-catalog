@@ -22,6 +22,10 @@ const bookSchema = new Schema<IBook>({
         type: Schema.Types.ObjectId,
         ref: "Review"
     }],
+    addedBy: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
 }, { timestamps: true });
 
 const Book = model<IBook>("Book", bookSchema);

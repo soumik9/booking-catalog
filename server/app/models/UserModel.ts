@@ -41,7 +41,7 @@ userSchema.statics.isUserExist = async function (param: string): Promise<Partial
         path: 'wishlists',
         populate: { path: 'book' }
     }).populate({
-        path: 'currentPlan',
+        path: 'currentPlans',
         populate: { path: 'book' }
     });
 }

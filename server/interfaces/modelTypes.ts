@@ -24,6 +24,7 @@ export interface IBook {
     genre: string;
     publication_date: string;
     reviews: Types.ObjectId[] | IReview[];
+    addedBy: Types.ObjectId[] | IUser;
 }
 
 export interface IReview {
