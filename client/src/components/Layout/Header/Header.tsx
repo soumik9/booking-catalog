@@ -13,12 +13,14 @@ import NavRight from './components/NavRight';
 import { GiSelfLove } from 'react-icons/gi'
 import { MdOutlineNextPlan } from 'react-icons/md'
 import { useGetProfileQuery } from '../../../redux/features/auth/authApi';
+import useAuthCheck from '../../../config/useAuthCheck';
 
 const Header = () => {
 
     // global
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const authChecked = useAuthCheck();
     const auth = useAppSelector((state) => state.auth);
     const { data: profile, isLoading } = useGetProfileQuery(undefined);
 
@@ -27,19 +29,13 @@ const Header = () => {
 
     // if authenticate then intiaing data
     useEffect(() => {
-        if (auth.isAuthenticated) {
+        if (authChecked) {
             dispatch(profileLog(profile?.data))
-        } else {
-            dispatch(userLoggedOut());
         }
-    }, [auth.isAuthenticated, dispatch, profile?.data])
+    }, [authChecked, dispatch, profile?.data])
 
     // handlers
     const handleSideNav = (): void => setShowSideNav(!showSideNav);
-
-
-    if (isLoading) return <div className='text-center'>Loading...</div>;
-
 
     // logout functionlity
     const handleLogout = (e: any) => {

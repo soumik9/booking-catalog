@@ -30,11 +30,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "/wishlist",
-        element: <Layout><Wishlist /></Layout>,
+        element: <RequiredAuth><Layout><Wishlist /></Layout></RequiredAuth>,
     },
     {
         path: "/current-plan",
-        element: <Layout><CurrentPlan /></Layout>,
+        element: <RequiredAuth><Layout><CurrentPlan /></Layout></RequiredAuth>,
     },
     {
         path: "/signin",

@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 import Cookies from 'js-cookie';
-import { userLoggedIn } from "./authSlice";
+import { profileLog, userLoggedIn } from "./authSlice";
 import toast from 'react-hot-toast';
 
 export const authApi = apiSlice.injectEndpoints({
@@ -31,6 +31,9 @@ export const authApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: data
             }),
+            invalidatesTags: (result, error, arg) => [
+                "Profile", "Users", 'CurrentPlan'
+            ],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
 
@@ -62,7 +65,7 @@ export const authApi = apiSlice.injectEndpoints({
                     await queryFulfilled;
                     // dispatch(profileLog(result.data.user));
                 } catch (error: any) {
-                    toast.error(error.error.data.message);
+                    // toast.error(error.error.data.message);
                 }
             }
         }),
