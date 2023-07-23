@@ -5,6 +5,7 @@ import useDelete from '../../config/hooks/useDelete';
 import ReviewBox from './components/ReviewBox';
 import Reviews from './components/Reviews';
 import { useAppSelector } from '../../config/helpers';
+import Button from '../../components/Button/Button';
 
 const BookDetails = () => {
 
@@ -37,9 +38,10 @@ const BookDetails = () => {
 
                     <div className="mt-6 flex gap-4 justify-end">
                         <Link to={`/edit-book/${book?.data?._id}`}>
-                            <button className="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 trans focus:outline-none">
-                                Edit
-                            </button>
+                            <Button
+                                disabled={!auth.isAuthenticated}
+                                text={auth.isAuthenticated ? 'Edit' : 'Please Login'}
+                            />
                         </Link>
 
                         <button

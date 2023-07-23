@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/edit-book/:bookId",
-        element: <Layout><EditBook /></Layout>,
+        element: <RequiredAuth><Layout><EditBook /></Layout></RequiredAuth>,
     },
     {
         path: "/signin",

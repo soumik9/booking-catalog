@@ -8,7 +8,7 @@ const validationSchema = yup.object().shape({
     title: yup.string().required('Email is required'),
     author: yup.string().required('Password is required'),
     genre: yup.string().required('Password is required'),
-    publication_date: yup.string().required('Password is required'),
+    publication_date: yup.string().required('Publication date is required'),
 });
 
 const AddNewBook = () => {
