@@ -19,7 +19,13 @@ const SendResponse_1 = __importDefault(require("../../../utils/SendResponse"));
 const Profile = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     // get my profile user
-    const result = yield UserModel_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id);
+    const result = yield UserModel_1.default.findById((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id).populate({
+        path: 'wishlists',
+        populate: { path: 'book' }
+    }).populate({
+        path: 'currentPlans',
+        populate: { path: 'book' }
+    });
     (0, SendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

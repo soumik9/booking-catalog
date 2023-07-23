@@ -16,7 +16,15 @@ const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 const http_status_1 = __importDefault(require("http-status"));
 const SendResponse_1 = __importDefault(require("../../../utils/SendResponse"));
 const BookModel_1 = __importDefault(require("../../models/BookModel"));
+const ApiError_1 = __importDefault(require("../../../utils/errors/ApiError"));
 const DeleteBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    // finding the book
+    const findBook = yield BookModel_1.default.findById(req.params.id);
+    // checking user req is valid
+    if ((findBook === null || findBook === void 0 ? void 0 : findBook.addedBy.toString()) !== ((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id)) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'You have not added this book!');
+    }
     // deleting specific cow
     const result = yield BookModel_1.default.findByIdAndDelete(req.params.id);
     (0, SendResponse_1.default)(res, {

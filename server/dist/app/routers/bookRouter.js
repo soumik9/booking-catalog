@@ -10,10 +10,11 @@ const GetBook_1 = __importDefault(require("../controllers/book/GetBook"));
 const CreateBook_1 = __importDefault(require("../controllers/book/CreateBook"));
 const UpdateBook_1 = __importDefault(require("../controllers/book/UpdateBook"));
 const DeleteBook_1 = __importDefault(require("../controllers/book/DeleteBook"));
+const auth_1 = __importDefault(require("../middlewares/auth"));
 //routes
-router.post('/', CreateBook_1.default);
+router.post('/', (0, auth_1.default)(), CreateBook_1.default);
 router.get('/:id', GetBook_1.default);
 router.get('/', GetBooks_1.default);
-router.patch('/:id', UpdateBook_1.default);
-router.delete('/:id', DeleteBook_1.default);
+router.patch('/:id', (0, auth_1.default)(), UpdateBook_1.default);
+router.delete('/:id', (0, auth_1.default)(), DeleteBook_1.default);
 exports.default = router;

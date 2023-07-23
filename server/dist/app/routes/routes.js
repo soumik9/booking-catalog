@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const authRouter_1 = __importDefault(require("../routers/authRouter"));
 const bookRouter_1 = __importDefault(require("../routers/bookRouter"));
 const reviewRouter_1 = __importDefault(require("../routers/reviewRouter"));
+const wishlistRouter_1 = __importDefault(require("../routers/wishlistRouter"));
+const currentPlanRouter_1 = __importDefault(require("../routers/currentPlanRouter"));
 const router = express_1.default.Router();
 const apiRoutes = [
     {
@@ -20,6 +22,14 @@ const apiRoutes = [
     {
         path: '/review',
         route: reviewRouter_1.default,
+    },
+    {
+        path: '/wishlist',
+        route: wishlistRouter_1.default,
+    },
+    {
+        path: '/current-plan',
+        route: currentPlanRouter_1.default,
     },
 ];
 apiRoutes.forEach(route => router.use(route.path, route.route));

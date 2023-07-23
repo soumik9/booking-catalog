@@ -15,23 +15,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 const http_status_1 = __importDefault(require("http-status"));
 const SendResponse_1 = __importDefault(require("../../../utils/SendResponse"));
-const BookModel_1 = __importDefault(require("../../models/BookModel"));
 const ApiError_1 = __importDefault(require("../../../utils/errors/ApiError"));
-const UpdateBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    // finding the book
-    const findBook = yield BookModel_1.default.findById(req.params.id);
-    // checking user req is valid
-    if ((findBook === null || findBook === void 0 ? void 0 : findBook.addedBy.toString()) !== ((_a = req === null || req === void 0 ? void 0 : req.user) === null || _a === void 0 ? void 0 : _a._id)) {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'You have not added this book!');
+const WishlistModel_1 = __importDefault(require("../../models/WishlistModel"));
+const UserModel_1 = __importDefault(require("../../models/UserModel"));
+const CreateWishlist = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // finding the wishlist
+    const findWishlist = yield WishlistModel_1.default.findOne({ $and: [{ book: req.body.book, user: req.body.user }] });
+    if (findWishlist)
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'Already added to wishlist!');
+    // creating wishlist
+    const result = yield WishlistModel_1.default.create(req.body);
+    if (result._id) {
+        yield UserModel_1.default.findByIdAndUpdate(req.body.user, { $push: { wishlists: result._id } });
     }
-    // updating specific book data
-    const result = yield BookModel_1.default.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
+    else {
+        yield WishlistModel_1.default.findByIdAndDelete(result._id);
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'Failed to create wishlist!');
+    }
     (0, SendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Book updated successfully!',
-        data: result,
+        message: 'Book added to wishlist!',
     });
 }));
-exports.default = UpdateBook;
+exports.default = CreateWishlist;

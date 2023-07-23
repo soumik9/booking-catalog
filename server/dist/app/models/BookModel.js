@@ -22,6 +22,10 @@ const bookSchema = new mongoose_1.Schema({
             type: mongoose_1.Schema.Types.ObjectId,
             ref: "Review"
         }],
+    addedBy: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User"
+    },
 }, { timestamps: true });
 const Book = (0, mongoose_1.model)("Book", bookSchema);
 exports.default = Book;

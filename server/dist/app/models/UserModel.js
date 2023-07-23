@@ -37,11 +37,25 @@ const userSchema = new mongoose_1.Schema({
         },
         default: 'user'
     },
+    wishlists: [{
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "Wishlist"
+        }],
+    currentPlans: [{
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "CurrentPlan"
+        }]
 }, { timestamps: true });
 // checking is admin exists
 userSchema.statics.isUserExist = function (param) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield this.findOne({ email: param }).select('password').exec();
+        return yield this.findOne({ email: param }).populate({
+            path: 'wishlists',
+            populate: { path: 'book' }
+        }).populate({
+            path: 'currentPlans',
+            populate: { path: 'book' }
+        });
     });
 };
 // checking is password matched
