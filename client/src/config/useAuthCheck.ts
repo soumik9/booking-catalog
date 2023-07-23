@@ -14,13 +14,14 @@ export default function useAuthCheck() {
         const accessToken = Cookies.get('accessToken');
         const _id = Cookies.get('_id');
 
-        if (accessToken && _id) {
-            const headers = { Authorization: `Bearer ${accessToken}` };
+        if (accessToken) {
+            const headers = { Authorization: `${accessToken}` };
 
             // getting logged user data
-            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/profile/${_id}`, { headers })
+            fetch(`${process.env.REACT_APP_API_URL}/auth/profile`, { headers })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data, 'dta');
                     dispatch(profileLog(data.data))
                 })
                 .catch(error => console.error(error));

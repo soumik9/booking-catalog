@@ -18,6 +18,8 @@ export interface IUser {
     name: string;
     email: string;
     passowrd?: string;
+    wishlists?: IWishlist[];
+    currentPlans?: ICurrentPlan[];
 }
 
 export interface IGenre {
@@ -28,4 +30,15 @@ export interface IGenre {
 export interface IYear {
     _id: string;
     year: string;
+}
+
+export interface IWishlist {
+    _id: string;
+    book: IBook;
+    user: IUser;
+}
+
+export interface ICurrentPlan extends IWishlist {
+    isFinished: boolean;
+
 }

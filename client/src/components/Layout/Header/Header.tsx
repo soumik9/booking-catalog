@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react'
-import { homeUrl, navItems, wishlistUrl } from '../../../config/constants';
+import { currentPlanUrl, homeUrl, navItems, wishlistUrl } from '../../../config/constants';
 import { linkTypes } from '../../../config/types';
 import NavItem from './components/NavItem';
 import MobileHumburgerMenu from './components/HumburgerMenu';
@@ -11,6 +11,7 @@ import { userLoggedOut } from '../../../redux/features/auth/authSlice';
 import { BsBookHalf } from 'react-icons/bs';
 import NavRight from './components/NavRight';
 import { GiSelfLove } from 'react-icons/gi'
+import { MdOutlineNextPlan } from 'react-icons/md'
 
 const Header = () => {
 
@@ -51,9 +52,16 @@ const Header = () => {
                         {/* desktop menu */}
                         <ul className="hidden lg:flex items-center lg:gap-x-[25px]">
 
+                            <Link to={currentPlanUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
+                                Current Plan
+                                <MdOutlineNextPlan className='relative top-[1px]' />
+                                ({auth?.user?.currentPlans?.filter((item) => item.isFinished === false).length})
+                            </Link>
+
                             <Link to={wishlistUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
                                 Wishlist
-                                <GiSelfLove />
+                                <GiSelfLove className='relative top-[1px]' />
+                                ({auth?.user?.wishlists?.length})
                             </Link>
 
                             {auth.isAuthenticated ? navItems.slice(0, 1).map((item: linkTypes) => (

@@ -9,6 +9,7 @@ import EditBook from "../views/EditBook/EditBook";
 import AllBooks from "../views/AllBooks/AllBooks";
 import RequiredAuth from "../components/RequiredAuth/RequiredAuth";
 import Wishlist from "../views/Wishlist/Wishlist";
+import CurrentPlan from "../views/CurrentPlan/CurrentPlan";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
     {
         path: "/wishlist",
         element: <Layout><Wishlist /></Layout>,
+    },
+    {
+        path: "/current-plan",
+        element: <Layout><CurrentPlan /></Layout>,
     },
     {
         path: "/signin",

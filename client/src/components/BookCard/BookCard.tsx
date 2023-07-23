@@ -5,17 +5,28 @@ import { useAppSelector } from '../../config/helpers';
 import { GiSelfLove } from 'react-icons/gi';
 import { useCreateWishlistMutation } from '../../redux/features/wishlist/wishlistApi';
 import { AiOutlineLoading } from 'react-icons/ai';
+import { MdOutlineNextPlan } from 'react-icons/md';
+import { useCreateCurrentPlanMutation } from '../../redux/features/currentPlan/currentPlanApi';
 
 const BookCard = ({ item }: { item: IBook }) => {
 
     // global
     const auth = useAppSelector((state) => state.auth);
     const [createWishlist, { isLoading }] = useCreateWishlistMutation();
+    const [createCurrentPlan, { isLoading: currentPlanLoading }] = useCreateCurrentPlanMutation();
 
     // handler
     const handleWishlist = (event: any) => {
         event.preventDefault();
         createWishlist({
+            user: auth._id,
+            book: item._id,
+        })
+    }
+
+    const handleCurrentPlan = (event: any) => {
+        event.preventDefault();
+        createCurrentPlan({
             user: auth._id,
             book: item._id,
         })
@@ -29,7 +40,13 @@ const BookCard = ({ item }: { item: IBook }) => {
                 <p className="text-sm text-gray-600 mt-1">Publication Date: {item.publication_date}</p>
                 <p className="text-sm text-gray-600 mt-1">Genre: {item.genre}</p>
 
-                <div className="mt-6 flex justify-end">
+                <div className="mt-6 flex gap-2 justify-end">
+                    <Button
+                        text={currentPlanLoading ? <AiOutlineLoading /> : <MdOutlineNextPlan />}
+                        disabled={!auth.isAuthenticated}
+                        onClick={(event) => handleCurrentPlan(event)}
+                        type='button'
+                    />
                     <Button
                         text={isLoading ? <AiOutlineLoading /> : <GiSelfLove />}
                         disabled={!auth.isAuthenticated}

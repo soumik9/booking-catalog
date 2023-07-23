@@ -6,6 +6,7 @@ export const signInUrl: string = '/signin';
 export const signUpUrl: string = '/signup';
 export const addNewBook: string = '/add-new-book';
 export const wishlistUrl: string = '/wishlist';
+export const currentPlanUrl: string = '/current-plan';
 
 // nav itmes
 export const navItems: linkTypes[] = [
