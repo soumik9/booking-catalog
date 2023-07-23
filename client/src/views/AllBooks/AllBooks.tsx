@@ -5,6 +5,7 @@ import BookCard from '../../components/BookCard/BookCard';
 import { useEffect, useState } from 'react';
 import { genres, years } from '../../config/constants';
 import FilterCheckbox from './components/FilterCheckbox';
+import BodyHead from '../Home/components/BodyHead';
 
 const AllBooks = () => {
     // states
@@ -57,23 +58,16 @@ const AllBooks = () => {
 
     return (
         <div className='container'>
-            <div className="mt-6 flex justify-between my-6">
-                <div>
-                    <p>Showing total result: {books?.data?.length} of {books?.meta?.total ? books?.meta?.total : '0'}</p>
-                </div>
 
-                <Link to="/add-new-book">
-                    <button className="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 trans focus:outline-none">
-                        Add New Book
-                    </button>
-                </Link>
-            </div>
 
-            <h1 className='text-[28px] text-center mb-1 text-primary font-semibold'>All Books Showcase</h1>
-            <hr />
+            <BodyHead
+                totalLength={books?.data?.length}
+                showingLength={books?.meta?.total ? books?.meta?.total : 0}
+                title='All Books Showcase'
+            />
 
             {isLoading ? <div className='flex justify-center my-6'>Loading...</div> : (
-                <div className='grid grid-cols-4'>
+                <div className='grid grid-cols-4 gap-5'>
                     <div className='mt-5 flex flex-col gap-2'>
                         <p>Genres</p>
                         <hr className='mb-2' />
