@@ -1,9 +1,12 @@
 import React, { MouseEventHandler } from "react";
-import { navItems } from "../../../../config/constants";
+import { currentPlanUrl, navItems, wishlistUrl } from "../../../../config/constants";
 import { linkTypes } from "../../../../config/types";
 import MobileNavItem from "./MobileNavItem";
 import { useAppSelector } from "../../../../config/helpers";
 import { AiOutlineClose } from "react-icons/ai";
+import { MdOutlineNextPlan } from "react-icons/md";
+import { GiSelfLove } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 type Props = {
   handleSideNav: MouseEventHandler<HTMLButtonElement>;
@@ -24,6 +27,20 @@ const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav, handleLogout }: Pr
       <div className="fixed top-0 left-0 bottom-0 w-full bg-[rgba(0,0,0,0.3)] flex justify-end md:justify-start ">
         <nav className="flex flex-col md:w-full w-[285px] h-full py-[40px] bg-white overflow-y-auto relative ">
           <div className="md:mt-[60px] mt-[30px]">
+
+            {auth.isAuthenticated && <div className="px-[40px]">
+              <Link to={currentPlanUrl} className='flex gap-1 items-center text-primary'>
+                Current Plan
+                <MdOutlineNextPlan className='relative top-[1px]' />
+                ({auth?.user?.currentPlans?.filter((item) => item.isFinished === false).length})
+              </Link>
+
+              <Link to={wishlistUrl} className='flex gap-1 items-center text-primary mt-5 mb-2'>
+                Wishlist
+                <GiSelfLove className='relative top-[1px]' />
+                ({auth?.user?.wishlists?.length})
+              </Link></div>}
+
             <ul>
               {auth.isAuthenticated ? navItems.slice(0, 1).map((item: linkTypes) => (
                 <MobileNavItem

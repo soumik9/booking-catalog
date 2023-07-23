@@ -38,11 +38,8 @@ const Header = () => {
     const handleSideNav = (): void => setShowSideNav(!showSideNav);
 
 
-    if (isLoading) {
-        return <div className='text-center'>Loading...</div>;
-    }
+    if (isLoading) return <div className='text-center'>Loading...</div>;
 
-    // console.log(profile?.data);
 
     // logout functionlity
     const handleLogout = (e: any) => {
@@ -51,6 +48,9 @@ const Header = () => {
         dispatch(userLoggedOut());
         toast.success('Logout Success!')
     }
+
+    // loading
+    if (isLoading) return <div className='text-center'>Loading...</div>;
 
     return (
         <>
@@ -71,17 +71,17 @@ const Header = () => {
                         {/* desktop menu */}
                         <ul className="hidden lg:flex items-center lg:gap-x-[25px]">
 
-                            <Link to={currentPlanUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
+                            {auth.isAuthenticated && <><Link to={currentPlanUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
                                 Current Plan
                                 <MdOutlineNextPlan className='relative top-[1px]' />
                                 ({auth?.user?.currentPlans?.filter((item) => item.isFinished === false).length})
                             </Link>
 
-                            <Link to={wishlistUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
-                                Wishlist
-                                <GiSelfLove className='relative top-[1px]' />
-                                ({auth?.user?.wishlists?.length})
-                            </Link>
+                                <Link to={wishlistUrl} className='flex gap-1 items-center text-primary-100 hover:text-white trans'>
+                                    Wishlist
+                                    <GiSelfLove className='relative top-[1px]' />
+                                    ({auth?.user?.wishlists?.length})
+                                </Link></>}
 
                             {auth.isAuthenticated ? navItems.slice(0, 1).map((item: linkTypes) => (
                                 <NavItem
