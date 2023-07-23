@@ -9,10 +9,10 @@ export const apiSlice = createApi({
         prepareHeaders: async (headers, { getState }) => {
             // @ts-ignore
             const token = getState()?.auth?.accessToken;
-            token && headers.set("Authorization", `Bearer ${token}`)
+            token && headers.set("Authorization", `${token}`)
             return headers;
         }
     }),
-    tagTypes: ['Books', 'Book', 'Users', 'Profile', 'Reviews', 'Review'],
+    tagTypes: ['Books', 'Book', 'Users', 'Profile', 'Reviews', 'Review', 'CurrentPlan'],
     endpoints: (builder) => ({}),
 })

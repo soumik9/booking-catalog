@@ -35,7 +35,6 @@ export const authApi = apiSlice.injectEndpoints({
                 try {
 
                     const result = await queryFulfilled;
-                    console.log(result.data);
 
                     // setting logged data to redux state
                     dispatch(userLoggedIn({
@@ -56,14 +55,13 @@ export const authApi = apiSlice.injectEndpoints({
 
         // get profile endpoint here
         getProfile: builder.query({
-            query: (userId) => `auth/profile`,
+            query: () => `auth/profile`,
             providesTags: ['Profile'],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
-                    const result = await queryFulfilled;
-                    dispatch(profileLog(result.data.user));
+                    await queryFulfilled;
+                    // dispatch(profileLog(result.data.user));
                 } catch (error: any) {
-                    console.log(error, 'profile');
                     toast.error(error.error.data.message);
                 }
             }
@@ -72,4 +70,4 @@ export const authApi = apiSlice.injectEndpoints({
     })
 });
 
-export const { useSignupMutation, useLoginMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useGetProfileQuery } = authApi;

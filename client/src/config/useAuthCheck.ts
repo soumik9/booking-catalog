@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { useAppDispatch } from './helpers';
-import { profileLog, userLoggedIn } from '../redux/features/auth/authSlice';
+import { userLoggedIn } from '../redux/features/auth/authSlice';
 
 export default function useAuthCheck() {
 
@@ -15,17 +15,6 @@ export default function useAuthCheck() {
         const _id = Cookies.get('_id');
 
         if (accessToken) {
-            const headers = { Authorization: `${accessToken}` };
-
-            // getting logged user data
-            fetch(`${process.env.REACT_APP_API_URL}/auth/profile`, { headers })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data, 'dta');
-                    dispatch(profileLog(data.data))
-                })
-                .catch(error => console.error(error));
-
             // storing data from cookies
             dispatch(
                 userLoggedIn({

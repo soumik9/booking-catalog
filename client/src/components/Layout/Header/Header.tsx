@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { currentPlanUrl, homeUrl, navItems, wishlistUrl } from '../../../config/constants';
 import { linkTypes } from '../../../config/types';
 import NavItem from './components/NavItem';
@@ -7,11 +7,12 @@ import MobileHumburgerMenu from './components/HumburgerMenu';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../config/helpers';
 import { toast } from 'react-hot-toast';
-import { userLoggedOut } from '../../../redux/features/auth/authSlice';
+import { profileLog, userLoggedOut } from '../../../redux/features/auth/authSlice';
 import { BsBookHalf } from 'react-icons/bs';
 import NavRight from './components/NavRight';
 import { GiSelfLove } from 'react-icons/gi'
 import { MdOutlineNextPlan } from 'react-icons/md'
+import { useGetProfileQuery } from '../../../redux/features/auth/authApi';
 
 const Header = () => {
 
@@ -19,11 +20,29 @@ const Header = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const auth = useAppSelector((state) => state.auth);
+    const { data: profile, isLoading } = useGetProfileQuery(undefined);
 
     // states
     const [showSideNav, setShowSideNav] = useState(false);
+
+    // if authenticate then intiaing data
+    useEffect(() => {
+        if (auth.isAuthenticated) {
+            dispatch(profileLog(profile?.data))
+        } else {
+            dispatch(userLoggedOut());
+        }
+    }, [auth.isAuthenticated, dispatch, profile?.data])
+
     // handlers
     const handleSideNav = (): void => setShowSideNav(!showSideNav);
+
+
+    if (isLoading) {
+        return <div className='text-center'>Loading...</div>;
+    }
+
+    // console.log(profile?.data);
 
     // logout functionlity
     const handleLogout = (e: any) => {
