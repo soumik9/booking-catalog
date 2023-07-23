@@ -1,30 +1,22 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDeleteBookMutation, useGetBookQuery } from '../../redux/features/book/bookApi';
 import { Link } from 'react-router-dom';
-import { homeUrl } from '../../config/constants';
+import useDelete from '../../config/hooks/useDelete';
 
 const BookDetails = () => {
 
     const { bookId } = useParams();
-    const navigate = useNavigate();
+
+    // hooks
+    const { sendDeleteRequest } = useDelete();
 
     // get books from redux api
     const { data: book, isLoading, isError } = useGetBookQuery(bookId);
     const [deleteBook, { isLoading: deleteLoading }] = useDeleteBookMutation(undefined);
 
-    // deleting
-    const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        try {
-            await deleteBook(book?.data?._id);
-            navigate(homeUrl);
-        } catch (error) {
-            console.error('Error deleting book:', error);
-        }
-    }
-
-    if (isLoading || deleteLoading) {
-        return <div className='f-center'>{isLoading ? 'Loading...' : 'Deleting'}</div>
+    // loading || error
+    if (isLoading) {
+        return <div className='f-center'>Loading...</div>
     }
     if (isError) {
         return <div className='f-center'>Error...</div>
@@ -49,9 +41,9 @@ const BookDetails = () => {
                         <button
                             type='button'
                             className="px-4 py-2 text-white bg-error rounded-md hover:bg-error-hover trans focus:outline-none"
-                            onClick={handleDelete}
+                            onClick={() => sendDeleteRequest(book?.data?._id, deleteBook)}
                         >
-                            Delete
+                            {deleteLoading ? 'Deleting' : 'Delete'}
                         </button>
                     </div>
                 </div>
