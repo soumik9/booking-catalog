@@ -7,8 +7,8 @@ import GetCurrentPlan from '../controllers/currentPlan/GetCurrentPlan';
 import auth from '../middlewares/auth';
 
 //routes
-router.post('/', CreateCurrentPlan);
+router.post('/', auth(), CreateCurrentPlan);
 router.get('/by-user', auth(), GetCurrentPlan);
-router.patch('/:id', UpdateMarkRead);
+router.patch('/:id', auth(), UpdateMarkRead);
 
 export default router;
