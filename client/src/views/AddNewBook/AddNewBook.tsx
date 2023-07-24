@@ -75,6 +75,7 @@ const AddNewBook = () => {
                 </div>
                 <button
                     type="submit"
+                    disabled={isLoading}
                     className="w-full px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 focus:outline-none focus:bg-primary trans"
                 >
                     {isLoading ? 'Loadiing' : 'Add Now'}
