@@ -3,7 +3,7 @@ import { currentPlanUrl, navItems, wishlistUrl } from "../../../../config/consta
 import { linkTypes } from "../../../../config/types";
 import MobileNavItem from "./MobileNavItem";
 import { useAppSelector } from "../../../../config/helpers";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineNextPlan } from "react-icons/md";
 import { GiSelfLove } from "react-icons/gi";
 import { Link } from "react-router-dom";
@@ -55,13 +55,21 @@ const MobileHumburgerMenu = ({ handleSideNav, setShowSideNav, handleLogout }: Pr
                   setShowSideNav={setShowSideNav}
                 />
               ))}
-              {auth.isAuthenticated && <button
-                type='button'
-                onClick={handleLogout}
-                className='text-white mx-[40px] bg-primary-700 px-5 py-2 rounded-md'
-              >
-                Logout
-              </button>}
+              {auth.isAuthenticated && <div className="mx-[40px]">
+
+                <p className="flex gap-2 items-center mb-4">
+                  <AiOutlineUser />
+                  {auth?.user?.name}
+                </p>
+
+                <button
+                  type='button'
+                  onClick={handleLogout}
+                  className='text-white  bg-primary-700 px-5 py-2 rounded-md'
+                >
+                  Logout
+                </button>
+              </div>}
 
             </ul>
           </div>
