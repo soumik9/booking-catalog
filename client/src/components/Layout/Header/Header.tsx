@@ -67,7 +67,7 @@ const Header = () => {
     }
 
     // loading
-    if (isLoading) return <div className='text-center'>Loading...</div>;
+    // if (isLoading) return <div className='text-center'>Loading...</div>;
 
     return (
         <>

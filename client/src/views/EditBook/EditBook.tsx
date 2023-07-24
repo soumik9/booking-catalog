@@ -102,6 +102,7 @@ const EditBook = () => {
                 </div>
                 <button
                     type="submit"
+                    disabled={updateLoading}
                     className="w-full px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 focus:outline-none focus:bg-primary trans"
                 >
                     {updateLoading ? 'Loading' : 'Update Now'}
