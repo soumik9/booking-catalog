@@ -23,7 +23,7 @@ const Reviews = ({ reviews }: Props) => {
                         <img src="/av.jpg" width={40} alt="" />
 
                         <div className="mb-1">
-                            <p>{item?.user?.name}</p>
+                            <p className="text-primary-400">{item?.user?.name}</p>
                             <p>{item?.desc}</p>
                         </div>
                     </div>) : <div className="f-center text-error">No Reviews</div>}

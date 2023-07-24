@@ -23,7 +23,7 @@ const Header = () => {
     const dispatch = useAppDispatch();
     const authChecked = useAuthCheck();
     const auth = useAppSelector((state) => state.auth);
-    const { data: profile, isLoading } = useGetProfileQuery(undefined);
+    const { data: profile } = useGetProfileQuery(undefined);
 
     // states
     const dropdownRef = useRef(null);

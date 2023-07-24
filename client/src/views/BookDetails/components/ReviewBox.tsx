@@ -50,7 +50,7 @@ const ReviewBox = ({ bookId }: Props) => {
                 <button
                     type="button"
                     className="w-[150px] px-4 py-2 text-white bg-primary rounded-md hover:bg-primary-600 focus:outline-none focus:bg-primary disabled:bg-primary-200 disabled:cursor-not-allowed trans"
-                    disabled={!review}
+                    disabled={!review || isLoading}
                     onClick={handleReview}
                 >
                     {isLoading ? 'Submitting' : 'Submit'}
